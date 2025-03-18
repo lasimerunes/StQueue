@@ -1,3 +1,0 @@
-C:/Users/lsm/CLionProjects/StQueue/cmake-build-debug/CMakeFiles/StQueue.dir
-C:/Users/lsm/CLionProjects/StQueue/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/lsm/CLionProjects/StQueue/cmake-build-debug/CMakeFiles/rebuild_cache.dir
