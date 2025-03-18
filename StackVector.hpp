@@ -35,7 +35,7 @@ public:
     StackVector(StackVector && other);
     StackVector & operator=(StackVector && other);
     // Деструктор
-    ~StackVector();
+    ~StackVector() override;
 
 
     // МЕТОДЫ

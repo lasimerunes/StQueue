@@ -9,5 +9,4 @@ int main() {
     arr.push(21);
     arr.push(3);
     std::cout << arr.pop() << " " << arr.pop() << " " << arr.pop() << "\n";
-
 }
