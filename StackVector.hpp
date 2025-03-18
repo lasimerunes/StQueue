@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include <exception>
 
 
 /*      -------------------------------
@@ -22,11 +23,11 @@ public:
 
 
 template<class T>
-class StackVector<T>: public Stack<T> {
+class StackVector: public Stack<T> {
 public:
     // КОНСТРУКТОРЫ
     StackVector();
-    StackVector(const std::size_t &size);
+    explicit StackVector(const std::size_t &size);
     // Копирование
     StackVector(const StackVector & other);
     StackVector & operator=(const StackVector & other);
@@ -38,9 +39,9 @@ public:
 
 
     // МЕТОДЫ
-    void push(const T& e);
-    T pop();
-    bool isEmpty();
+    void push(const T& e) override;
+    T pop() override;
+    bool isEmpty() override;
 
 
 
@@ -63,7 +64,7 @@ private:
 template<class T>
 StackVector<T>::StackVector(): size_(0), top_(0), data_(nullptr) {}
 template<class T>
-StackVector<T>::StackVector(const std::size_t &size): size_(size), top_(0), data_(std::make_shared<T[size]>({0})) {}
+StackVector<T>::StackVector(const std::size_t &size) : size_(size), top_(0), data_(std::make_shared<T[]>(size)) {}
 // Копирование
 template<class T>
 StackVector<T>::StackVector(const StackVector &other) {
@@ -77,6 +78,44 @@ StackVector<T>::StackVector(const StackVector &other) {
         tmp[i] = other.data_[i];
     }
     data_.swap(tmp);
+}
+// TODO: конструктор копирующего присваивания
+// TODO: Перемещение
+// Деструктор
+template<class T>
+StackVector<T>::~StackVector() = default;
+
+
+
+
+// МЕТОДЫ
+template<class T>
+void StackVector<T>::push(const T &e) {
+    if (top_ != size_) {
+        ++top_;
+        data_[top_] = e;
+    }
+    // TODO: сделать расширение массива при переполнении
+}
+
+template<class T>
+T StackVector<T>::pop() {
+    // TODO: чекнуть, че тут вообще, и дописать
+    if (top_) {
+        T tmp = data_[top_];
+        data_[top_] = 0;
+        --top_;
+        return tmp;
+    }
+    else {
+        throw std::out_of_range("Poop");
+    }
+}
+
+template<class T>
+bool StackVector<T>::isEmpty() {
+    // TODO: хз, если это вообще правильно, но пока что пофиг
+    return top_ == 0;
 }
 
 
