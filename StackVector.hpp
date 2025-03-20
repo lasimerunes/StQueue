@@ -42,6 +42,7 @@ public:
     void push(const T& e) override;
     T pop() override;
     bool isEmpty() override;
+    void out();
 
 
 
@@ -92,8 +93,8 @@ StackVector<T>::~StackVector() = default;
 template<class T>
 void StackVector<T>::push(const T &e) {
     if (top_ != size_) {
-        ++top_;
         data_[top_] = e;
+        top_++;
     }
     // TODO: сделать расширение массива при переполнении
 }
@@ -117,6 +118,15 @@ bool StackVector<T>::isEmpty() {
     // TODO: хз, если это вообще правильно, но пока что пофиг
     return top_ == 0;
 }
+
+template<class T>
+void StackVector<T>::out() {
+    for (std::ptrdiff_t i = 0; i < top_; ++i) {
+        std::cout << data_[i] << " ";
+    }
+    std::cout << "\n";
+}
+
 
 
 
