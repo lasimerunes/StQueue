@@ -8,5 +8,12 @@ int main() {
     arr.push(12);
     arr.push(21);
     arr.push(3);
-    std::cout << arr.pop() << " " << arr.pop() << " " << arr.pop() << "\n";
+    arr.out(true);
+    StackVector<int> arr2(arr);
+    std::cout << arr.pop() << " " << arr.pop()  << "\n";
+    arr.push(31);
+    arr.out(true);
+    arr2.out(true);
+
+
 }
