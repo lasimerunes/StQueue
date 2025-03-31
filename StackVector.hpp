@@ -42,14 +42,14 @@ public:
     void push(const T& e) override;
     T pop() override;
     bool isEmpty() override;
-    void out() const;
 
+    void out(bool r = false) const;
 
 
 private:
     std::size_t size_;              // На сколько элементов создан массив
-    std::size_t top_;               // Количество значащих элементов, индекс последнего элемента равен top_ - 1
-    T* data_;     // Сам массив
+    std::size_t top_;               // Количество значащих элементов / Индекс последнего элемента
+    T*  data_;     // Сам массив
 
 };
 
@@ -69,18 +69,19 @@ StackVector<T>::StackVector(const std::size_t &size) : size_(size), top_(0), dat
 // Копирование
 template<class T>
 StackVector<T>::StackVector(const StackVector &other) {
-    // Насколько я понял, такой метод работы с массивами и shared_ptr работает только после C++17.
-    // В C++17 и раньше надо было писать кастомный деструктор.
+    // TODO: вот это вот все надо
     size_ = other.size_;
     top_ = other.top_;
-    // Здесь получается использовать идиому copy-and-swap.
-    // TODO: перенос даты
+
+
 }
 // TODO: конструктор копирующего присваивания
 // TODO: Перемещение
 // Деструктор
 template<class T>
-StackVector<T>::~StackVector() = default;
+StackVector<T>::~StackVector() {
+    delete[] data_;
+}
 
 
 
@@ -89,7 +90,7 @@ StackVector<T>::~StackVector() = default;
 template<class T>
 void StackVector<T>::push(const T &e) {
     if (top_ != size_) {
-        data_[top_-1] = e;
+        data_[top_] = e;
         ++top_;
     }
     // TODO: сделать расширение массива при переполнении
@@ -98,7 +99,7 @@ void StackVector<T>::push(const T &e) {
 template<class T>
 T StackVector<T>::pop() {
     // TODO: чекнуть, че тут вообще, и дописать
-    if (top_+1) {
+    if (top_) {
         T tmp = data_[top_-1];
         data_[top_-1] = 0;
         --top_;
@@ -116,15 +117,20 @@ bool StackVector<T>::isEmpty() {
 }
 
 template<class T>
-void StackVector<T>::out() const{
-    for (std::size_t i = size_; i > 0; --i) {
-        std::cout << data_[i-1] << " ";
+void StackVector<T>::out(const bool r) const {
+    if (!top_) return;
+    if (r){
+        for(std::size_t i = top_; i > 0; --i){
+            std::cout << i-1 << ": " << data_[i-1] << " ";
+        }
+    }
+    else {
+        for (std::size_t i = 0; i < top_; ++i) {
+            std::cout << i << ": " << data_[i] << " ";
+        }
     }
     std::cout << "\n";
 }
-
-
-
 
 
 

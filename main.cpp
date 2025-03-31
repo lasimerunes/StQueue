@@ -4,15 +4,15 @@
 
 int main() {
 
-    StackVector<int> arr(6);
+    StackVector<int> arr(3);
     arr.push(12);
     arr.push(21);
     arr.push(3);
-
-
-    //arr.out();
-    std::cout << arr.pop() << " " << arr.pop() << " " << arr.pop() << "\n";
-    arr.out();
+    arr.out(true);
+    StackVector<int> arr2(6);
+    std::cout << arr.pop() << " " << arr.pop()  << "\n";
+    arr.push(31);
+    arr.out(true);
 
 
 }
