@@ -9,11 +9,10 @@ int main() {
     arr.push(21);
     arr.push(3);
     arr.out(true);
-    StackVector<int> arr2(arr);
+    StackVector<int> arr2(6);
     std::cout << arr.pop() << " " << arr.pop()  << "\n";
     arr.push(31);
     arr.out(true);
-    arr2.out(true);
 
 
 }
