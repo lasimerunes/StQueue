@@ -54,9 +54,9 @@ private:
 class StackUnderflow final : public std::exception{
 public:
     StackUnderflow() : reason_("Stack Underflow") {}
-    [[nodiscard]] const char* what() const noexcept override { return reason_.c_str(); }
+    [[nodiscard]] const char* what() const noexcept override { return reason_; }
 private:
-    const std::string& reason_; // ! const
+    const char * reason_; // ! const
 };
 
 
@@ -167,7 +167,7 @@ void StackVector<T>::swap(const T& other) {
 template<class T>
 void StackVector<T>::out(const bool r) const {
     if (!top_){
-        std::cout << "Empty\n";
+        std::cout << "Empty";
     }
     else if (r){
         std::cout << "Out: ";

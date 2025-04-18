@@ -55,9 +55,9 @@ private:
 class QueueUnderflow final : public std::exception {
 public:
     QueueUnderflow() : reason_("Queue Underflow") {};
-    [[nodiscard]] const char* what() const noexcept override { return reason_.c_str(); }
+    [[nodiscard]] const char* what() const noexcept override { return reason_; }
 private:
-    const std::string& reason_; // ! const
+    const char* reason_; // ! const
 };
 
 
