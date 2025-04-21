@@ -131,30 +131,15 @@ void QueueList<T>::enQueue(const T &e) {
     if (!head_){
         head_ = new Node(e);
     }
-    // Если новый элемент должен стоять вначале
-    else if (e < head_->data_) {
-        Node * node = new Node(e, head_);
-        head_ = node;
-    }
     else {
         Node * current = head_;
+        // Пробегаем до конца списка
         while (current->next_) {
-            if (e < current->next_->data_) {
-                // Создаем новый узел
-                Node * node = new Node(e);
-                // Ссылаем его на следующий от текущего
-                node->next_ = current->next_;
-                // Теперь текущий должен ссылаться на новый
-                current->next_ = node;
-                return;
-            }
             current = current->next_;
         }
-        // Если элемент должен стоять в конце списка
-        if (current->data_ != e){
-            current->next_ = new Node(e);
-        }
+        current->next_ = new Node(e);
     }
+
 }
 
 template<class T>
